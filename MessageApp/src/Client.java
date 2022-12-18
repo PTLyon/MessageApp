@@ -3,6 +3,7 @@ import java.net.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
 public class Client extends JFrame {
 
     private JTextField userText;
@@ -14,7 +15,7 @@ public class Client extends JFrame {
     private Socket connection;
 
     //constructor
-    public Client(String host){
+    public Client(String host) {
         super("Client for Lyon's Server");
         serverIP = host;
         userText = new JTextField();
@@ -36,21 +37,21 @@ public class Client extends JFrame {
     }
 
     //connect to server
-    public void startRunning(){
-        try{
+    public void startRunning() {
+        try {
             connectToServer();
             setupStreams();
             whileChatting();
-        }catch(EOFException eofException){
+        } catch (EOFException eofException) {
             showMessage("\n client terminated the connection");
-        }catch(IOException ioexception){
+        } catch (IOException ioexception) {
             ioexception.printStackTrace();
-        }finally{
+        } finally {
             closeCrap();
         }
     }
 
-    private void connectToServer() throws IOException{
+    private void connectToServer() throws IOException {
         showMessage("\n Attempting connection...");
         connection = new Socket(InetAddress.getByName(serverIP), 6789);
         showMessage("Connected to:" + connection.getInetAddress().getHostName())
